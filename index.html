@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive Online Quiz Application for Web Technology. Test your knowledge of HTML, CSS, JavaScript and Web Technology fundamentals.">
+  <title>Interactive Online Quiz Application – Web Technology</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Background Decorative Shapes -->
+  <div class="bg-container" aria-hidden="true">
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="badge">College Assignment</div>
+      <h1 class="main-title">Interactive Online Quiz Application</h1>
+      <p class="sub-title">Web Technology Quiz</p>
+    </header>
+
+    <!-- Quiz Card Wrapper -->
+    <main class="quiz-card" id="quiz-card" role="main">
+      
+      <!-- ================= 1. HOME / START SCREEN ================= -->
+      <section id="home-screen" class="screen-section active" aria-labelledby="home-title">
+        <div class="welcome-box">
+          <div class="quiz-icon-wrapper" aria-hidden="true">
+            <svg class="quiz-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+              <path d="M6 6h10"/>
+              <path d="M6 10h10"/>
+              <path d="M6 14h6"/>
+            </svg>
+          </div>
+
+          <h2 id="home-title" class="section-title">Ready to Test Your Skills?</h2>
+          <p class="description-text">
+            Test your knowledge of HTML, CSS, JavaScript and basic Web Technology concepts.
+          </p>
+
+          <!-- Quiz Overview Highlights -->
+          <div class="info-grid">
+            <div class="info-card">
+              <span class="info-number">10</span>
+              <span class="info-label">Questions</span>
+            </div>
+            <div class="info-card">
+              <span class="info-number">4</span>
+              <span class="info-label">Choices Each</span>
+            </div>
+            <div class="info-card">
+              <span class="info-number">Instant</span>
+              <span class="info-label">Feedback</span>
+            </div>
+            <div class="info-card">
+              <span class="info-number">100%</span>
+              <span class="info-label">Interactive</span>
+            </div>
+          </div>
+
+          <div class="instructions-box">
+            <h3>Quiz Guidelines</h3>
+            <ul>
+              <li>Each question has exactly one correct answer.</li>
+              <li>You will receive immediate visual feedback upon selecting an option.</li>
+              <li>You can navigate back to previous questions to review your answers.</li>
+              <li>Your total score and detailed performance will be shown at the end.</li>
+            </ul>
+          </div>
+
+          <div class="action-row">
+            <button id="start-btn" class="btn btn-primary btn-large">
+              <span>Start Quiz</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 2. QUIZ QUESTIONS SCREEN ================= -->
+      <section id="quiz-screen" class="screen-section" aria-labelledby="question-text" style="display: none;">
+        
+        <!-- Quiz Meta Bar -->
+        <div class="quiz-meta-bar">
+          <div class="meta-item">
+            <span class="meta-label">Progress</span>
+            <span id="question-counter" class="meta-value">Question 1 of 10</span>
+          </div>
+          <div class="meta-item meta-score">
+            <span class="meta-label">Current Score</span>
+            <span id="live-score" class="meta-value highlight">0 / 10</span>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container" role="progressbar" id="progress-bar-container" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+          <div id="progress-bar" class="progress-bar-fill" style="width: 10%;"></div>
+        </div>
+
+        <!-- Question Card Content -->
+        <div class="question-container">
+          <h2 id="question-text" class="question-title">Question goes here...</h2>
+          
+          <!-- Answer Options Container -->
+          <div id="options-container" class="options-container" role="radiogroup" aria-labelledby="question-text">
+            <!-- Dynamically populated by script.js -->
+          </div>
+
+          <!-- Answer Feedback Alert -->
+          <div id="feedback-alert" class="feedback-alert" style="display: none;" aria-live="polite">
+            <!-- Dynamic feedback message -->
+          </div>
+        </div>
+
+        <!-- Quiz Navigation Controls -->
+        <div class="quiz-nav-row">
+          <button id="prev-btn" class="btn btn-secondary" disabled>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Previous</span>
+          </button>
+
+          <div class="nav-right">
+            <button id="next-btn" class="btn btn-primary">
+              <span>Next</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+
+            <button id="submit-btn" class="btn btn-success" style="display: none;">
+              <span>Submit Quiz</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 3. RESULT SCREEN ================= -->
+      <section id="result-screen" class="screen-section" aria-labelledby="result-title" style="display: none;">
+        <div class="result-box">
+          <div class="result-badge-icon" id="result-icon-wrapper" aria-hidden="true">
+            <!-- Success / Trophy Icon -->
+            <svg class="result-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+              <path d="M4 22h16"/>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+            </svg>
+          </div>
+
+          <h2 id="result-title" class="result-main-heading">Quiz Completed!</h2>
+          <p id="performance-message" class="performance-message">Performance message goes here</p>
+
+          <!-- Score Card Overview -->
+          <div class="score-card">
+            <div class="score-circle-wrapper">
+              <div class="score-circle">
+                <span id="final-percentage" class="score-percent">0%</span>
+                <span class="score-sub">Score</span>
+              </div>
+            </div>
+
+            <div class="score-details-list">
+              <div class="detail-row">
+                <span class="detail-label">Final Score:</span>
+                <span id="final-score" class="detail-value">0 / 10</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Percentage:</span>
+                <span id="final-percentage-text" class="detail-value">0%</span>
+              </div>
+              <div class="detail-row text-correct">
+                <span class="detail-label">Correct Answers:</span>
+                <span id="correct-count" class="detail-value">0</span>
+              </div>
+              <div class="detail-row text-incorrect">
+                <span class="detail-label">Incorrect Answers:</span>
+                <span id="incorrect-count" class="detail-value">0</span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label">Total Questions:</span>
+                <span class="detail-value">10</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="result-action-row">
+            <button id="restart-btn" class="btn btn-primary btn-large">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 0 1 15-6.7L21 8"/>
+                <path d="M21 3v5h-5"/>
+                <path d="M21 12a9 9 0 0 1-15 6.7L3 16"/>
+                <path d="M3 21v-5h5"/>
+              </svg>
+              <span>Restart Quiz</span>
+            </button>
+            <button id="toggle-review-btn" class="btn btn-outline">
+              <span>View Answer Key & Review</span>
+            </button>
+          </div>
+
+          <!-- Answer Review Section (Collapsible) -->
+          <div id="review-section" class="review-section" style="display: none;">
+            <h3 class="review-heading">Detailed Question Review</h3>
+            <div id="review-list" class="review-list">
+              <!-- Dynamically populated by script.js -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Interactive Online Quiz Application &bull; Web Technology College Assignment</p>
+      <p class="sub-footer">Developed with HTML5, CSS3 &amp; Vanilla JavaScript &bull; Ready for GitHub &amp; Vercel</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
